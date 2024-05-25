@@ -13,6 +13,15 @@ SECRET_KEY = 'django-insecure-n%!atv$_$#1lrhxbsz-8e^rcxrv+2=x$q&)!od53oy2*!v1np1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'bellogabriele2001@gmail.com'
+EMAIL_HOST_PASSWORD = 'xilyevsdrxphjqkw'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -26,8 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework',
-    'corsheaders'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -38,7 +46,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
