@@ -14,6 +14,7 @@ class EmailView(generics.ListCreateAPIView):
   def post(self, request):
     serializer = EmailSerializer(data=request.data)
     if serializer.is_valid():
+      serializer.save()
       receipent = serializer.validated_data['recipient']
       subject = serializer.validated_data['subject']
       body = serializer.validated_data['body']
