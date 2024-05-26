@@ -4,15 +4,15 @@ const EmailHistory = ({emails}) => {
   return(
     <div>
       <h2>Email inviate</h2>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
-            <td>Mittente</td>
-            <td>Desinatario</td>
-            <td>Oggetto</td>
-            <td>Contenuto</td>
-            <td>Allegato</td>
-            <td>Inviato</td>
+            <th scope='col'>Mittente</th>
+            <th scope='col'>Desinatari</th>
+            <th scope='col'>Oggetto</th>
+            <th scope='col'>Contenuto</th>
+            <th scope='col'>Allegato</th>
+            <th scope='col'>Inviato</th>
           </tr>
         </thead>
         <tbody>
