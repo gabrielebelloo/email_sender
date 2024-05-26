@@ -1,22 +1,6 @@
-import {useState, useEffect} from 'react';
-import api from '../api';
 import Email from './Email';
 
-const EmailHistory = () => {
-  const [emails, setEmails] = useState([]);
-
-  useEffect(() =>{
-    getEmails();
-  }, [])
-  
-  const getEmails = () => {
-    api
-      .get('/api/') 
-      .then((res) => res.data)
-      .then((data) => setEmails(data))
-      .catch((err) => console.log(err))
-  };
-  
+const EmailHistory = ({emails}) => {
   return(
     <div>
       <h2>Email inviate</h2>
