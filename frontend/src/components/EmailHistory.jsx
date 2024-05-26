@@ -11,6 +11,7 @@ const EmailHistory = ({emails}) => {
             <td>Desinatario</td>
             <td>Oggetto</td>
             <td>Contenuto</td>
+            <td>Allegato</td>
             <td>Inviato</td>
           </tr>
         </thead>
