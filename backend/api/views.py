@@ -5,8 +5,6 @@ from .models import Email
 from .serializers import EmailSerializer
 from django.core.mail import EmailMessage
 from django.conf import settings
-from os import path
-
 
 class EmailView(generics.ListCreateAPIView):
   queryset = Email.objects.all()
@@ -16,7 +14,7 @@ class EmailView(generics.ListCreateAPIView):
     serializer = EmailSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
-      receipent = serializer.validated_data['recipient']
+      recipient = serializer.validated_data['recipient']
       subject = serializer.validated_data['subject']
       body = serializer.validated_data['body']
       attachment = serializer.validated_data['attachment']
@@ -24,7 +22,7 @@ class EmailView(generics.ListCreateAPIView):
         subject,
         body,
         settings.EMAIL_HOST_USER, 
-        [receipent]
+        [recipient]
       )
       attachment_name = replace_chars(attachment.name, ' ()')
       attachment_path = settings.FILE_PATH_FIELD_DIRECTORY + attachment_name
