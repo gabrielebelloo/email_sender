@@ -86,6 +86,9 @@ DATABASES = {
 }
 
 
+FILE_PATH_FIELD_DIRECTORY = os.getenv('FILE_PATH_FIELD_DIRECTORY')
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

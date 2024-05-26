@@ -7,3 +7,4 @@ class Email(models.Model):
   subject = models.CharField(max_length=200)
   body = models.TextField()
   date = models.DateTimeField(auto_now_add=True)
+  attachment = models.FileField(upload_to=settings.FILE_PATH_FIELD_DIRECTORY)
