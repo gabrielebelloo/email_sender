@@ -1,7 +1,9 @@
-import Form from './components/Form';
-import EmailHistory from './components/EmailHistory';
+import Form from './pages/Form';
+import EmailHistory from './pages/EmailHistory';
+import Navbar from './components/Navbar';
 import {useState, useEffect} from 'react';
 import api from './api';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 const App = () => {
   const [emails, setEmails] = useState([]);
@@ -29,6 +31,15 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (!email.recipient) {
+      alert('Devi inserire un destinatario!')
+      return
+    } else if (!email.body) {
+      alert('Devi inserire del contenuto!')
+      return
+    }
+
     const file = document.querySelector('#attachment').files
     try {
       const res = await api.post('/api/', {
@@ -72,9 +83,29 @@ const App = () => {
 
   return (
     <>
-      <h1>Invia un'email</h1>
-      <Form email={email} handleChange={handleChange} handleSubmit={handleSubmit}/>
-      <EmailHistory emails={emails} />
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <Form email={email} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            }
+          />
+          <Route
+            path='/emails'
+            element={
+              <EmailHistory emails={emails} />
+            }
+          />
+          <Route
+            path='*'
+            element={
+              <Form email={email} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
