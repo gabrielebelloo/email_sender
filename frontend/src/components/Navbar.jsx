@@ -10,10 +10,10 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbar">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="/">Send Email</a>
+              <a className="nav-link" href="/">Invia un'email</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/emails">Email History</a>
+              <a className="nav-link" href="/emails">Cronologia Email</a>
             </li>
           </ul>
         </div>
