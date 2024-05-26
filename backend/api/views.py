@@ -5,6 +5,7 @@ from .models import Email
 from .serializers import EmailSerializer
 from django.core.mail import EmailMessage
 from django.conf import settings
+from rest_framework.permissions import AllowAny
 
 class EmailView(generics.ListCreateAPIView):
   queryset = Email.objects.all()
@@ -41,6 +42,11 @@ class EmailView(generics.ListCreateAPIView):
     else:
       print(serializer.errors)
       return Response(serializer.errors, status=400)
+    
+
+class EmailDelete(generics.DestroyAPIView):
+  queryset = Email.objects.all()
+  serializer_class = EmailSerializer
 
 
 def replace_chars(text, chars):

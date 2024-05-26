@@ -1,6 +1,5 @@
-const Email = ({ email }) => {
+const Email = ({ email, onDelete }) => {
   const options = {
-    weekday: "long",
     year: "numeric",
     month: "numeric",
     day: "numeric",
@@ -18,12 +17,12 @@ const Email = ({ email }) => {
 
  return(
   <tr>
-    <td>{email.sender}</td>
     <td>{email.recipient}</td>
-    <td>{email.subject}</td>
-    <td>{email.body}</td>
-    <td>{fileName}</td>
+    <td className='col-2'>{email.subject}</td>
+    <td className='col-5'>{email.body}</td>
+    <td className='col-2'>{fileName}</td> 
     <td>{formattedDate}</td>
+    <td><button className='btn' onClick={() => {onDelete(email.id)}}>X</button></td>
   </tr>
  )
 };

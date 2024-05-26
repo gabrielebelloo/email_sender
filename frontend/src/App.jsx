@@ -3,7 +3,7 @@ import EmailHistory from './pages/EmailHistory';
 import Navbar from './components/Navbar';
 import {useState, useEffect} from 'react';
 import api from './api';
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 const App = () => {
   const [emails, setEmails] = useState([]);
@@ -21,7 +21,7 @@ const App = () => {
   };
 
   const [email, setEmail] = useState({
-    sender: 'bellogabriele2001@gmail.com',
+    sender: import.meta.env.VITE_EMAIL_HOST_USER,
     recipient: '',
     subject: '',
     body: ''
@@ -52,15 +52,14 @@ const App = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      
     } catch (error) {
       console.log(error)
     } finally { 
       resetComponent(); 
-      getEmails();
-      setLoading(false)
-      alert('Email inviata!')
+      setLoading(false);
+      alert('Email inviata!');
     }
+    getEmails();
   }
 
   const handleChange = (e) => {
@@ -74,11 +73,22 @@ const App = () => {
 
   const resetComponent = () => {
     setEmail({
-      sender: 'bellogabriele2001@gmail.com',
+      sender: import.meta.env.VITE_EMAIL_HOST_USER,
       recipient: '',
       subject: '',
       body: ''
     });
+  }
+
+  const deleteNote = (id) => {
+    try {
+      api.delete(`/api/delete/${id}/`);
+    } catch (error) {
+      console.log(error)
+    } finally { 
+      alert('Email eliminata!');
+    }
+    getEmails(); 
   }
 
   return (
@@ -95,7 +105,7 @@ const App = () => {
           <Route
             path='/emails'
             element={
-              <EmailHistory emails={emails} />
+              <EmailHistory emails={emails} onDelete={deleteNote}/>
             }
           />
           <Route
