@@ -14,20 +14,29 @@ class EmailView(generics.ListCreateAPIView):
     serializer = EmailSerializer(data=request.data)
     if serializer.is_valid():
       serializer.save()
+
       recipient = serializer.validated_data['recipient']
       subject = serializer.validated_data['subject']
       body = serializer.validated_data['body']
-      attachment = serializer.validated_data['attachment']
+
       mail = EmailMessage(
         subject,
         body,
         settings.EMAIL_HOST_USER, 
         [recipient]
       )
-      attachment_name = replace_chars(attachment.name, ' ()')
-      attachment_path = settings.FILE_PATH_FIELD_DIRECTORY + attachment_name
-      mail.attach_file(attachment_path)
-      mail.send()
+
+      try:
+        attachment = serializer.validated_data['attachment']
+      except:
+        print('No attachment')
+      else:
+        attachment_name = replace_chars(attachment.name, ' ()')
+        attachment_path = settings.FILE_PATH_FIELD_DIRECTORY + attachment_name
+        mail.attach_file(attachment_path)
+      finally:
+        mail.send()
+    
       return Response('Email sent successfully', status=200)
     else:
       print(serializer.errors)
