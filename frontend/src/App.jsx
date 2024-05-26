@@ -27,14 +27,21 @@ const App = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
+    const file = document.querySelector('#attachment').files
     try {
       const res = await api.post('/api/', {
         recipient: email.recipient,
         subject: email.subject, 
-        body: email.body
+        body: email.body,
+        attachment: file[0]
+      }, {  
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
+      
     } catch (error) {
       console.log(error)
     } finally { 
