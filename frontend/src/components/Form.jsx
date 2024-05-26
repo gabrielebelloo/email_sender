@@ -22,6 +22,11 @@ const Form = ({ email, handleChange, handleSubmit }) => {
         onChange={(e) => handleChange(e)}
       >
       </textarea>
+      <input
+        name='attachment'
+        type='file'
+        id='attachment'
+      />
       <button type='submit'>Invia</button>
     </form>
   )
